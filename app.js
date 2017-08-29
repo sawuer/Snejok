@@ -1,6 +1,6 @@
-new Templa('#temp1', {
+new Snegyok('#temp1', {
 	title: 'Hello world',
-	title2: 'Hello world22222',
-	someText: 'Some Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, iusto.',
-	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!'
+	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!',
+	list: ['some1', 'some2', 'some3', 'some4'],
+	list2: ['somelist1', 'somelist2', 'somelist3', 'somelist4'],
 });
