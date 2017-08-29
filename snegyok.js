@@ -35,13 +35,12 @@ this.Snegyok = (function() {
 
 			var allLoopsArray = view.match(pattern);
 			var removeEnds = allLoopsArray.map(i => {
-				return i.replace('(* endfor *)', '');
+				return i
+					.replace('(* endfor *)', '')
+					.replace('(* for', '');
 			});
-			
-			// var loopsArrays = allLoopsArray.map(i => {
-			// 	var result = i.split(' *)');
-			// 	return result;
-			// });
+
+
 
 			console.log(removeEnds);
 		}
