@@ -40,9 +40,9 @@ this.Snegyok = (function() {
 			var pat = /\(\* for[\s\S]*?endfor \*\)/gm;
 
 			var allLoopsArray = view.match(pat);
-			var removeEnds = allLoopsArray.map(i => {
+			var removeEnds = allLoopsArray.map(function(i) {
 				return i
-					.replace('(* endfor *)', '')
+					.replace(['(* endfor *)'], '')
 					.replace('(* for', '');
 			});
 
@@ -58,14 +58,14 @@ this.Snegyok = (function() {
 				var currentList = splittedArrays[i][0][0].replace(/\s*/g,'');
 				var currentHTML = splittedArrays[i][0][1];
 				var inpat = new RegExp('\\(\\* for ' + currentList + ' [\\s\\S]*?endfor \\*\\)', 'g')
+				var newHTML = '';
 
-				var newStr = '';
-				for (var j = 0; j < dataArray.length; j++) {
+				for (var j = 0; j < self.data[currentList].length; j++) {
 					var currentItemInList = self.data[currentList][j];
-					newStr += currentHTML.replace('(* this *)', currentItemInList);
+					newHTML += currentHTML.replace('(* this *)', currentItemInList);
 				}
 
-				view = view.replace(inpat, newStr)
+				view = view.replace(inpat, newHTML);
 			}
 			
 			entry.innerHTML = view;
