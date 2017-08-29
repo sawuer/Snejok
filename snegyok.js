@@ -1,3 +1,7 @@
+/* * * * * * * 
+  * * * * * * * 
+ * * * * * * */
+
 this.Snegyok = (function() {
 
 	function templaCtor(entry, confs) {
@@ -18,31 +22,53 @@ this.Snegyok = (function() {
 				return Object.keys(data)[index];
 			}
 			for (var i = 0; i < dataArray.length; i++) {
-				var reg = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g')
-			  view = view.replace(reg, data[key(i)]);
+				var pat = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g')
+			  view = view.replace(pat, data[key(i)]);
 			}
 			entry.innerHTML = view;
 		}
 
 
-		/* * * * * * * Looper * * * * * * */
+		/* * * * * * * * *
+		* * * Looper * * *
+		 * * * * * * * */
 
 		function looper(entry, data) {
 			var dataArray = Object.keys(data);
 			var entry = document.querySelector(entry);
 			var view = entry.innerHTML;
-			var pattern = /\(\* for[\s\S]*?endfor \*\)/gm;
+			var pat = /\(\* for[\s\S]*?endfor \*\)/gm;
 
-			var allLoopsArray = view.match(pattern);
+			var allLoopsArray = view.match(pat);
 			var removeEnds = allLoopsArray.map(i => {
 				return i
 					.replace('(* endfor *)', '')
 					.replace('(* for', '');
 			});
 
+			var splittedArrays = [];
 
+			for (var i = 0; i < removeEnds.length; i++) {
+				var newArr = [];
+				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
+				splittedArrays.push(newArr);
+			}
 
-			console.log(removeEnds);
+			for (var i = 0; i < splittedArrays.length; i++) {
+				var currentList = splittedArrays[i][0][0].replace(/\s*/g,'');
+				var currentHTML = splittedArrays[i][0][1];
+				var inpat = new RegExp('\\(\\* for ' + currentList + ' [\\s\\S]*?endfor \\*\\)', 'g')
+
+				var newStr = '';
+				for (var j = 0; j < dataArray.length; j++) {
+					var currentItemInList = self.data[currentList][j];
+					newStr += currentHTML.replace('(* this *)', currentItemInList);
+				}
+
+				view = view.replace(inpat, newStr)
+			}
+			
+			entry.innerHTML = view;
 		}
 
 
