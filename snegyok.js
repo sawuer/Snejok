@@ -14,14 +14,15 @@ this.Snegyok = (function() {
 
 		/* * * * * * * Templater * * * * * * */
 
-		function templater() {
+		this.templater = function() {
 			function key(index) {
 				return Object.keys(data)[index];
 			}
 			for (var i = 0; i < dataArray.length; i++) {
-				var pattern = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g')
+				var pattern = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g');
 			  view = view.replace(pattern, data[key(i)]);
 			}
+			console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 			return view;
 		}
 
@@ -30,12 +31,10 @@ this.Snegyok = (function() {
 		* * * Looper * * *
 		 * * * * * * * */
 
-		function looper() {
+		this.looper = function() {
 			var	splittedArrays = [];
 			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
-			if (allLoopsArray === null) {
-				return;
-			}
+			if (allLoopsArray === null) return;
 			var	removeEnds = allLoopsArray.map(function(i) {
 				return i
 					.replace(['(* endfor *)'], '')
@@ -47,31 +46,37 @@ this.Snegyok = (function() {
 				splittedArrays.push(newArr);
 			}
 			for (var i = 0; i < splittedArrays.length; i++) {
-				var currentList = splittedArrays[i][0][0].replace(/\s*/g,'');
-				var	currentHTML = splittedArrays[i][0][1];
-				var	pattern = new RegExp(
-					'\\(\\* for ' + currentList + ' [\\s\\S]*?endfor \\*\\)', 'g'
-				);
+				var curList = splittedArrays[i][0][0].replace(/\s*/g,'');
+				var	curHTML = splittedArrays[i][0][1];
+				var dataList = data[curList];
 				var newHTML = '';
-				for (var j = 0; j < (data[currentList] ? data[currentList].length : null); j++) {
-					var currentItemInList = data[currentList][j];
-					newHTML += currentHTML.replace('(* this *)', currentItemInList);
+				var	pattern = new RegExp(
+					'\\(\\* for ' + curList + ' [\\s\\S]*?endfor \\*\\)', 'g'
+				);
+				for (var j = 0; j < (dataList ? dataList.length : null); j++) {
+					var currentItemInList = dataList[j];
+					newHTML += curHTML.replace('(* item *)', currentItemInList);
 				}
 				view = view.replace(pattern, newHTML);
 			}
 			return view;
 		}
 
-
-		this.render = function() {
-			looper();
-			templater();
+		this.init = function() {
+			this.looper();
+			this.templater();
 			entry.innerHTML = view;
-		}
+		};
 
-		this.render();
+		this.init();
 
 	}
+
+	ctor.prototype = {
+		render: function() {
+			this.init();
+		}
+	};
 
 	return ctor;
 
