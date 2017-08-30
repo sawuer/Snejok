@@ -1,91 +1,78 @@
-/* * * * * * * 
-  * * * * * * * 
- * * * * * * */
-
 this.Snegyok = (function() {
 
-	function templaCtor(entry, confs) {
-		var self = this;
+	function ctor(entry, confs) {
 
 		// Public methods
 		this.entry = entry;
 		this.data = confs;
 		
 		// Private data
-		var view = document.querySelector(this.entry).innerHTML;
+		var	entry = document.querySelector(this.entry);
+		var view = entry.innerHTML;
+		var data = this.data;
+		var dataArray = Object.keys(data);
 
 		/* * * * * * * Templater * * * * * * */
 
-		function templater(entry, data) {
-			var 
-				dataArray = Object.keys(data),
-				entry = document.querySelector(entry);
+		function templater() {
 			function key(index) {
 				return Object.keys(data)[index];
 			}
 			for (var i = 0; i < dataArray.length; i++) {
-				var pat = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g')
-			  view = view.replace(pat, data[key(i)]);
+				var pattern = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g')
+			  view = view.replace(pattern, data[key(i)]);
 			}
+			return view;
 		}
 
-		function booler(entry, data) {
-			
-		}
 
 		/* * * * * * * * *
 		* * * Looper * * *
 		 * * * * * * * */
 
-		function looper(entry, data) {
-			var 
-				dataArray = Object.keys(data);
-				entry = document.querySelector(entry),
-				pat = /\(\* for[\s\S]*?endfor \*\)/gm,
-				splittedArrays = [],
-				allLoopsArray = view.match(pat),
-
-				removeEnds = allLoopsArray.map(function(i) {
-					return i
-						.replace(['(* endfor *)'], '')
-						.replace('(* for', '');
-				});
-
-
+		function looper() {
+			var	splittedArrays = [];
+			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
+			if (allLoopsArray === null) {
+				return;
+			}
+			var	removeEnds = allLoopsArray.map(function(i) {
+				return i
+					.replace(['(* endfor *)'], '')
+					.replace('(* for', '');
+			});
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
 				splittedArrays.push(newArr);
 			}
-
 			for (var i = 0; i < splittedArrays.length; i++) {
-				var 
-					currentList = splittedArrays[i][0][0].replace(/\s*/g,''),
-					currentHTML = splittedArrays[i][0][1],
-					inpat = new RegExp(
-						'\\(\\* for ' + currentList + ' [\\s\\S]*?endfor \\*\\)', 'g'
-					),
-					newHTML = '';
-
-				for (var j = 0; j < self.data[currentList].length; j++) {
-					var currentItemInList = self.data[currentList][j];
+				var currentList = splittedArrays[i][0][0].replace(/\s*/g,'');
+				var	currentHTML = splittedArrays[i][0][1];
+				var	pattern = new RegExp(
+					'\\(\\* for ' + currentList + ' [\\s\\S]*?endfor \\*\\)', 'g'
+				);
+				var newHTML = '';
+				for (var j = 0; j < (data[currentList] ? data[currentList].length : null); j++) {
+					var currentItemInList = data[currentList][j];
 					newHTML += currentHTML.replace('(* this *)', currentItemInList);
 				}
-
-				view = view.replace(inpat, newHTML);
+				view = view.replace(pattern, newHTML);
 			}
-			
-			entry.innerHTML = view;
+			return view;
 		}
 
 
+		this.render = function() {
+			looper();
+			templater();
+			entry.innerHTML = view;
+		}
 
-		booler(this.entry, this.data);
-		templater(this.entry, this.data);
-		looper(this.entry, this.data);
+		this.render();
 
 	}
 
-	return templaCtor;
+	return ctor;
 
 }());
