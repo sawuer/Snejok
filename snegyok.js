@@ -20,7 +20,6 @@ this.Snegyok = (function() {
 
 		this.templater = function() {
 			view = startHTML;
-			console.log(view)
 			function key(index) {
 				return Object.keys(self.data)[index];
 			}
@@ -36,6 +35,7 @@ this.Snegyok = (function() {
 		// For-loop for arrays
 
 		this.looper = function() {
+			
 			var	splittedArrays = [];
 			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
 			if (allLoopsArray === null) return;
@@ -75,28 +75,24 @@ this.Snegyok = (function() {
 
 
 
-
-
-
-
+		// For instance
 		this.render = function() {
 			this.templater();
 			this.looper();
-			// this.ifElse();
 			entry.innerHTML = view;
+
 		};
 
-		this.change = function(input, output) {
-			this.data[input] = output;
-			this.render();
-			console.log(this.data[input])
-			return view;
-		}
+		// this.change = function(input, output) {
+		// 	this.data[input] = output;
+		// 	this.render();
+		// 	return view;
+		// }
 
-		this.exec = function(callback) {
-			callback();
-			this.render();
-		}
+		// this.exec = function(callback) {
+		// 	callback();
+		// 	this.render();
+		// }
 
 		this.render();
 

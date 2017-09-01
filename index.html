@@ -3,25 +3,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style type="text/css">
+		.bg {
+			background-color: #eee;
+			margin: 10px;
+			display: block;
+			padding: 1px 10px;
+		}
+		.bg2 {
+			background-color: #aaa;
+			margin: 10px;
+			display: block;
+			padding: 1px 10px;
+		}
+
+	</style>
 </head>
 <body>
 
-<div id="temp2">
-	<button id="changeName">Btn</button>
-	<h1>(* name *)</h1>
-	<p>(* age *)</p>
-	(* for music *)
-		<li><a href="">(* item *)</a></li>
-	(* endfor *)
-
-	(* if show *)
-		<p>(* age *)</p>
-	(* endif *)
-</div>
-
-<div id="temp1">
-	<p><em>(* counter *)</em></p>
-	<h1>(* title *)</h1>
+<ComponentOne class="bg">
+	<h2>(* title *)</h2>
 	<p>(* text *)</p>
 	<ul>
 		(* for list *)
@@ -33,7 +34,25 @@
 			<li><a href="">(* item *)</a></li>
 		(* endfor *)
 	</ul>
-</div>
+
+	<ComponentTwo class="bg2">
+		<h2>(* title *)</h2>
+		<p>(* text *)</p>
+		<ul>
+			(* for music *)
+				<li><a href="">(* item *)</a></li>
+			(* endfor *)
+		</ul>
+		<ul>
+			(* for music *)
+				<li><a href="">(* item *)</a></li>
+			(* endfor *)
+		</ul>
+	</ComponentTwo>
+
+</ComponentOne>
+
+
 
 
 
