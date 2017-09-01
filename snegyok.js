@@ -1,6 +1,7 @@
 this.Snegyok = (function() {
 
-	function ctor(entry, confs) {
+	return function(entry, confs) {
+		var self = this;
 
 		// Public methods
 		this.entry = entry;
@@ -8,19 +9,20 @@ this.Snegyok = (function() {
 		
 		// Private data
 		var	entry = document.querySelector(this.entry);
-		var view = entry.innerHTML;
-		var data = this.data;
-		var dataArray = Object.keys(data);
+		var startHTML = document.querySelector(this.entry).innerHTML;
+		var view = startHTML;
+		var dataArray = Object.keys(this.data);
+
 
 		/* * * * * * * Templater * * * * * * */
 
 		this.templater = function() {
 			function key(index) {
-				return Object.keys(data)[index];
+				return Object.keys(self.data)[index];
 			}
 			for (var i = 0; i < dataArray.length; i++) {
 				var pattern = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g');
-			  view = view.replace(pattern, data[key(i)]);
+			  view = view.replace(pattern, self.data[key(i)]);
 			}
 			console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 			return view;
@@ -32,6 +34,7 @@ this.Snegyok = (function() {
 		 * * * * * * * */
 
 		this.looper = function() {
+			view = startHTML;
 			var	splittedArrays = [];
 			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
 			if (allLoopsArray === null) return;
@@ -48,7 +51,7 @@ this.Snegyok = (function() {
 			for (var i = 0; i < splittedArrays.length; i++) {
 				var curList = splittedArrays[i][0][0].replace(/\s*/g,'');
 				var	curHTML = splittedArrays[i][0][1];
-				var dataList = data[curList];
+				var dataList = self.data[curList];
 				var newHTML = '';
 				var	pattern = new RegExp(
 					'\\(\\* for ' + curList + ' [\\s\\S]*?endfor \\*\\)', 'g'
@@ -62,22 +65,16 @@ this.Snegyok = (function() {
 			return view;
 		}
 
-		this.init = function() {
+		this.render = function() {
 			this.looper();
 			this.templater();
 			entry.innerHTML = view;
 		};
 
-		this.init();
+		this.render();
 
 	}
 
-	ctor.prototype = {
-		render: function() {
-			this.init();
-		}
-	};
 
-	return ctor;
 
 }());
