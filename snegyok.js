@@ -1,11 +1,14 @@
 this.Snegyok = (function() {
 
 	return function(entry, confs) {
+
+
 		var self = this;
 
 		// Public methods
 		this.entry = entry;
 		this.data = confs;
+
 		
 		// Private data
 		var	entry = document.querySelector(this.entry);

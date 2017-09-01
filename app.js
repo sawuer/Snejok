@@ -1,4 +1,4 @@
-var app = new Snegyok('#temp1', {
+var ComponentOne = new Snegyok('#temp1', {
 	title: 'Hello world',
 	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!',
 	list: [787, 'some2', 'some3', 'some4'],
@@ -7,7 +7,7 @@ var app = new Snegyok('#temp1', {
 
 
 
-new Snegyok('#temp2', {
+var ComponentTwo = new Snegyok('#temp2', {
 	name: 'Sowyer',
 	age: 21,
 	music: ['some1', 'some2']
@@ -15,7 +15,10 @@ new Snegyok('#temp2', {
 
 
 setTimeout(function() {
-	app.data.title = 'Hello 2';
-	app.render();
+	ComponentOne.data.title = 'Hello 2';
+	ComponentOne.data.list = ['some1','some2'];
+	ComponentOne.render();
 }, 1000);
+
+
 
