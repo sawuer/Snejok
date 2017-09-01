@@ -20,6 +20,7 @@ this.Snegyok = (function() {
 		/* * * * * * * Templater * * * * * * */
 
 		this.templater = function() {
+
 			function key(index) {
 				return Object.keys(self.data)[index];
 			}
@@ -77,6 +78,7 @@ this.Snegyok = (function() {
 		this.change = function(input, output) {
 			this.data[input] = output;
 			this.render();
+			
 		}
 
 		this.render();
