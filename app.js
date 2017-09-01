@@ -15,10 +15,11 @@ var ComponentTwo = new Snegyok('#temp2', {
 
 
 setTimeout(function() {
-	ComponentOne.data.title = 'Hello 2';
-	ComponentOne.data.list = ['some1','some2'];
-	ComponentOne.render();
+	ComponentOne.change('title', 'Hello 2');
+	ComponentOne.change('list', ['some1','some2']);
 }, 1000);
 
 
-
+document.querySelector('#changeName').onclick = function() {
+	ComponentTwo.change('name', 'Ramona');
+};

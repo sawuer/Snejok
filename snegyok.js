@@ -74,6 +74,11 @@ this.Snegyok = (function() {
 			entry.innerHTML = view;
 		};
 
+		this.change = function(input, output) {
+			this.data[input] = output;
+			this.render();
+		}
+
 		this.render();
 
 	}
