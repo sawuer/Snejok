@@ -2,7 +2,6 @@ this.Snegyok = (function() {
 
 	return function(entry, confs) {
 
-
 		var self = this;
 
 		// Public methods
@@ -17,10 +16,11 @@ this.Snegyok = (function() {
 		var dataArray = Object.keys(this.data);
 
 
-		/* * * * * * * Templater * * * * * * */
+		// Props substitution
 
 		this.templater = function() {
-
+			view = startHTML;
+			console.log(view)
 			function key(index) {
 				return Object.keys(self.data)[index];
 			}
@@ -33,12 +33,9 @@ this.Snegyok = (function() {
 		}
 
 
-		/* * * * * * * * *
-		* * * Looper * * *
-		 * * * * * * * */
+		// For-loop for arrays
 
 		this.looper = function() {
-			view = startHTML;
 			var	splittedArrays = [];
 			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
 			if (allLoopsArray === null) return;
@@ -67,18 +64,38 @@ this.Snegyok = (function() {
 				view = view.replace(pattern, newHTML);
 			}
 			return view;
-		}
+		};
+
+
+
+		// this.ifElse = function() {
+		// 	return view;
+		// }
+
+
+
+
+
+
+
 
 		this.render = function() {
-			this.looper();
 			this.templater();
+			this.looper();
+			// this.ifElse();
 			entry.innerHTML = view;
 		};
 
 		this.change = function(input, output) {
 			this.data[input] = output;
 			this.render();
-			
+			console.log(this.data[input])
+			return view;
+		}
+
+		this.exec = function(callback) {
+			callback();
+			this.render();
 		}
 
 		this.render();
