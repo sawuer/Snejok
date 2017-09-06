@@ -10,9 +10,10 @@ var Main = new Snegyok('Main', {
 	template: `
 
 		(* if showTitle *)
-			(* title *)
+			<h1>(* title *)</h1>
 		(* endif *)
 
+		<p>Description:</p>
 		<ul>
 			(* obj description *)
 				<li>(* prop *) - (* val *)</li>
@@ -21,6 +22,5 @@ var Main = new Snegyok('Main', {
 
 		<Header class="bg2"></Header>
 		<Content class="bg2"></Content>
-		
 	`
 });

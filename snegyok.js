@@ -122,11 +122,10 @@ this.Snegyok = (function() {
 				var curList = splittedArrays[i][0][0].replace(/\s*/g,'');
 				var dataList = self.data[curList];
 				if (dataList) {
-					view = view
-						.replace('(* endif *)', '')
-						.replace('(* if ', '')
-						.replace('*)', '')
-						.replace(curList, '');
+					var deleteItems = ['(* endif *)', '(* if ', '*)', curList];
+					for (var i = 0; i < deleteItems.length; i++) {
+						view = view.replace(deleteItems[i], '');
+					}
 				} else {
 					var	pattern = new RegExp(
 						'\\(\\* if ' + curList + ' [\\s\\S]*?endif \\*\\)', 'g'
