@@ -35,22 +35,20 @@ this.Snegyok = (function() {
 
 		// Loop for arrays
 		this.forArray = function() {
-			var	splittedArrays = [];
-			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
-			if (allLoopsArray === null) return;
-			var	removeEnds = allLoopsArray.map(function(i) {
-				return i
-					.replace(['(* endfor *)'], '')
-					.replace('(* for', '');
+			var	splitArrays = [];
+			var	allLoopArr = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
+			if (allLoopArr === null) return;
+			var	removeEnds = allLoopArr.map(function(i) {
+				return i.replace(['(* endfor *)'], '').replace('(* for', '');
 			});
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
-				splittedArrays.push(newArr);
+				splitArrays.push(newArr);
 			}
-			for (var i = 0; i < splittedArrays.length; i++) {
-				var curList = splittedArrays[i][0][0].replace(/\s*/g,'');
-				var	curHTML = splittedArrays[i][0][1];
+			for (var i = 0; i < splitArrays.length; i++) {
+				var curList = splitArrays[i][0][0].replace(/\s*/g,'');
+				var	curHTML = splitArrays[i][0][1];
 				var dataList = self.data[curList];
 				var newHTML = '';
 				var	pattern = new RegExp(
@@ -68,22 +66,20 @@ this.Snegyok = (function() {
 
 		// Loop for objects
 		this.forObj = function() {
-			var	splittedArrays = [];
-			var	allLoopsArray = view.match(/\(\* obj[\s\S]*?endobj \*\)/gm);
-			if (allLoopsArray === null) return;
-			var	removeEnds = allLoopsArray.map(function(i) {
-				return i
-					.replace(['(* endobj *)'], '')
-					.replace('(* obj', '');
+			var	splitArrays = [];
+			var	allLoopArr = view.match(/\(\* obj[\s\S]*?endobj \*\)/gm);
+			if (allLoopArr === null) return;
+			var	removeEnds = allLoopArr.map(function(i) {
+				return i.replace(['(* endobj *)'], '').replace('(* obj', '');
 			});
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
-				splittedArrays.push(newArr);
+				splitArrays.push(newArr);
 			}
-			for (var i = 0; i < splittedArrays.length; i++) {
-				var curList = splittedArrays[i][0][0].replace(/\s*/g,'');
-				var	curHTML = splittedArrays[i][0][1];
+			for (var i = 0; i < splitArrays.length; i++) {
+				var curList = splitArrays[i][0][0].replace(/\s*/g,'');
+				var	curHTML = splitArrays[i][0][1];
 				var dataList = self.data[curList];
 				var newHTML = '';
 				var	pattern = new RegExp(
@@ -93,9 +89,7 @@ this.Snegyok = (function() {
 					var currentItemInList = dataList[j];
 					var val = dataList[Object.keys(dataList)[j]];
 					var prop = Object.keys(dataList)[j];
-					newHTML += curHTML
-						.replace('(* val *)', val)
-						.replace('(* prop *)', prop);
+					newHTML += curHTML.replace('(* val *)', val).replace('(* prop *)', prop);
 				}
 				view = view.replace(pattern, newHTML);
 			}
@@ -105,10 +99,10 @@ this.Snegyok = (function() {
 
 		// If else
 		this.ifElse = function() {
-			var	splittedArrays = [];
-			var	allLoopsArray = view.match(/\(\* if[\s\S]*?endif \*\)/gm);
-			if (allLoopsArray === null) return;
-			var	removeEnds = allLoopsArray.map(function(i) {
+			var	splitArrays = [];
+			var	allLoopArr = view.match(/\(\* if[\s\S]*?endif \*\)/gm);
+			if (allLoopArr === null) return;
+			var	removeEnds = allLoopArr.map(function(i) {
 				return i
 					.replace(['(* endif *)'], '')
 					.replace('(* if', '');
@@ -116,15 +110,15 @@ this.Snegyok = (function() {
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
-				splittedArrays.push(newArr);
+				splitArrays.push(newArr);
 			}
-			for (var i = 0; i < splittedArrays.length; i++) {
-				var curList = splittedArrays[i][0][0].replace(/\s*/g,'');
+			for (var i = 0; i < splitArrays.length; i++) {
+				var curList = splitArrays[i][0][0].replace(/\s*/g,'');
 				var dataList = self.data[curList];
 				if (dataList) {
-					var deleteItems = ['(* endif *)', '(* if ', '*)', curList];
-					for (var i = 0; i < deleteItems.length; i++) {
-						view = view.replace(deleteItems[i], '');
+					var delThis = ['(* endif *)', '(* if ', '*)', curList];
+					for (var i = 0; i < delThis.length; i++) {
+						view = view.replace(delThis[i], '');
 					}
 				} else {
 					var	pattern = new RegExp(
