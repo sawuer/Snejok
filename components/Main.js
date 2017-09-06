@@ -9,6 +9,10 @@ var Main = new Snegyok('Main', {
 	},
 
 	template: `
+		{# Comment  number 1 .... some text and dots      #}
+		{#
+			Comment  number 2
+		#}
 
 		{*if showTitle*}
 			<h1>{*title*}</h1>

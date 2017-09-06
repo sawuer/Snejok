@@ -11,7 +11,6 @@ var Header = new Snegyok('Header', {
 
 		<h2>{*title*}</h2>
 		<p>{*text*}</p>
-
 		<ul>
 			{*for nav*}
 				<li><a href="">{*}</a></li>
