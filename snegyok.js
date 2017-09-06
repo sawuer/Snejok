@@ -12,9 +12,6 @@ this.Snegyok = (function() {
 		// Private data
 		var	entry = document.querySelector(this.entry);
 		var startHTML = this.template;
-
-		
-
 		var view = startHTML;
 		var dataArray = Object.keys(this.data);
 

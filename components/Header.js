@@ -1,18 +1,13 @@
 var Header = new Snegyok('Header', {
-	title: 'Component Two',
+	title: 'Header',
 	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!',
-	music: ['some1', 'some2'],
+	nav: ['About', 'FAQ', 'Contacts'],
 	
 	template: `
 		<h2>(* title *)</h2>
 		<p>(* text *)</p>
 		<ul>
-			(* for music *)
-				<li><a href="">(* item *)</a></li>
-			(* endfor *)
-		</ul>
-		<ul>
-			(* for music *)
+			(* for nav *)
 				<li><a href="">(* item *)</a></li>
 			(* endfor *)
 		</ul>
