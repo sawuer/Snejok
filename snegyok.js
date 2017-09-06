@@ -3,29 +3,31 @@ this.Snegyok = (function() {
 	return function(entry, confs) {
 		var self = this;
 
-		// Public props
+		/** 
+		 * Public props
+		 */
 		this.entry = entry;
 		this.data = confs;
 		this.template = confs.template;
 
 		
-		// Private data
+		/** 
+		 * Private data and methods
+		 */
 		var	entry = document.querySelector(this.entry);
-		var startHTML = this.template;
-		var view = startHTML;
+		var view = this.template;
 		var dataArray = Object.keys(this.data);
 
 
 		// Props substitution
-		this.propsSubst = function() {
-			view = startHTML;
+		function propsSubst() {
 			function key(index) {
 				return Object.keys(self.data)[index];
 			}
 			for (var i = 0; i < dataArray.length; i++) {
-				var pattern = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g');
+				var pattern = new RegExp('\\{\\*' + key(i) + '\\*\\}', 'g');
 				if (typeof view === 'undefined') {
-					throw new Error('"template" prop of current instance does not exist or it is empty!');
+					throw new Error('prop "template" of current component doesn\'t exist or is empty');
 				}
 			  view = view.replace(pattern, self.data[key(i)]);
 			}
@@ -34,17 +36,18 @@ this.Snegyok = (function() {
 
 
 		// Loop for arrays
-		this.forArray = function() {
+		function forArray() {
 			var	splitArrays = [];
-			var	allLoopArr = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
+			var	allLoopArr = view.match(/\{\*for [\s\S]*?endfor\*\}/gm);
 			if (allLoopArr === null) return;
 			var	removeEnds = allLoopArr.map(function(i) {
-				return i.replace(['(* endfor *)'], '').replace('(* for', '');
+				return i.replace(['{*endfor*}'], '').replace('{*for', '');
 			});
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
-				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
+				newArr.push(removeEnds[i].trim().split(/\*\}$/gm));
 				splitArrays.push(newArr);
+				console.log(newArr)
 			}
 			for (var i = 0; i < splitArrays.length; i++) {
 				var curList = splitArrays[i][0][0].replace(/\s*/g,'');
@@ -52,29 +55,29 @@ this.Snegyok = (function() {
 				var dataList = self.data[curList];
 				var newHTML = '';
 				var	pattern = new RegExp(
-					'\\(\\* for ' + curList + ' [\\s\\S]*?endfor \\*\\)', 'g'
+					'\\{\\*for ' + curList + '[\\s\\S]*?endfor\\*\\}', 'g'
 				);
 				for (var j = 0; j < (dataList ? dataList.length : null); j++) {
 					var currentItemInList = dataList[j];
-					newHTML += curHTML.replace('(* item *)', currentItemInList);
+					newHTML += curHTML.replace('{*}', currentItemInList);
 				}
 				view = view.replace(pattern, newHTML);
+				console.log(view)
 			}
 			return view;
 		};
 
-
 		// Loop for objects
-		this.forObj = function() {
+		function forObj() {
 			var	splitArrays = [];
-			var	allLoopArr = view.match(/\(\* obj[\s\S]*?endobj \*\)/gm);
+			var	allLoopArr = view.match(/\{\*obj [\s\S]*?endobj\*\}/gm);
 			if (allLoopArr === null) return;
 			var	removeEnds = allLoopArr.map(function(i) {
-				return i.replace(['(* endobj *)'], '').replace('(* obj', '');
+				return i.replace(['{*endobj*}'], '').replace('{*obj', '');
 			});
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
-				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
+				newArr.push(removeEnds[i].trim().split(/\*\}$/gm));
 				splitArrays.push(newArr);
 			}
 			for (var i = 0; i < splitArrays.length; i++) {
@@ -83,13 +86,13 @@ this.Snegyok = (function() {
 				var dataList = self.data[curList];
 				var newHTML = '';
 				var	pattern = new RegExp(
-					'\\(\\* obj ' + curList + ' [\\s\\S]*?endobj \\*\\)', 'g'
+					'\\{\\*obj ' + curList + '[\\s\\S]*?endobj\\*\\}', 'g'
 				);
 				for (var j = 0; j < (dataList ? Object.keys(dataList).length : null); j++) {
 					var currentItemInList = dataList[j];
 					var val = dataList[Object.keys(dataList)[j]];
 					var prop = Object.keys(dataList)[j];
-					newHTML += curHTML.replace('(* val *)', val).replace('(* prop *)', prop);
+					newHTML += curHTML.replace('{*val*}', val).replace('{*prop*}', prop);
 				}
 				view = view.replace(pattern, newHTML);
 			}
@@ -98,31 +101,29 @@ this.Snegyok = (function() {
 
 
 		// If else
-		this.ifElse = function() {
+		function ifElse() {
 			var	splitArrays = [];
-			var	allLoopArr = view.match(/\(\* if[\s\S]*?endif \*\)/gm);
+			var	allLoopArr = view.match(/\{\*if [\s\S]*?endif\*\}/gm);
 			if (allLoopArr === null) return;
 			var	removeEnds = allLoopArr.map(function(i) {
-				return i
-					.replace(['(* endif *)'], '')
-					.replace('(* if', '');
+				return i.replace(['{*endif*}'], '').replace('{*if', '');
 			});
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
-				newArr.push(removeEnds[i].trim().split(/\*\)$/gm));
+				newArr.push(removeEnds[i].trim().split(/\*\}$/gm));
 				splitArrays.push(newArr);
 			}
 			for (var i = 0; i < splitArrays.length; i++) {
 				var curList = splitArrays[i][0][0].replace(/\s*/g,'');
 				var dataList = self.data[curList];
 				if (dataList) {
-					var delThis = ['(* endif *)', '(* if ', '*)', curList];
+					var delThis = ['{*endif*}', '{*if ', '*}', curList];
 					for (var i = 0; i < delThis.length; i++) {
 						view = view.replace(delThis[i], '');
 					}
 				} else {
 					var	pattern = new RegExp(
-						'\\(\\* if ' + curList + ' [\\s\\S]*?endif \\*\\)', 'g'
+						'\\{\\*if ' + curList + '[\\s\\S]*?endif\\*\\}', 'g'
 					);
 					view = view.replace(pattern, '');
 				}
@@ -133,10 +134,10 @@ this.Snegyok = (function() {
 
 		// For instance
 		this.render = function() {
-			this.propsSubst();
-			this.forArray();
-			this.forObj();
-			this.ifElse();
+			propsSubst();
+			forArray();
+			forObj();
+			ifElse();
 			entry.innerHTML = view;
 		};
 

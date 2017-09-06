@@ -1,5 +1,6 @@
 var Main = new Snegyok('Main', {
 	showTitle: true,
+
 	title: 'Main title',
 
 	description: {
@@ -9,15 +10,15 @@ var Main = new Snegyok('Main', {
 
 	template: `
 
-		(* if showTitle *)
-			<h1>(* title *)</h1>
-		(* endif *)
+		{*if showTitle*}
+			<h1>{*title*}</h1>
+		{*endif*}
 
 		<p>Description:</p>
 		<ul>
-			(* obj description *)
-				<li>(* prop *) - (* val *)</li>
-			(* endobj *)
+			{*obj description*}
+				<li>{*prop*} - {*val*}</li>
+			{*endobj*}
 		</ul>
 
 		<Header class="bg2"></Header>

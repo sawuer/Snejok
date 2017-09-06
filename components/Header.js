@@ -9,25 +9,25 @@ var Header = new Snegyok('Header', {
 	
 	template: `
 
-		<h2>(* title *)</h2>
-		<p>(* text *)</p>
+		<h2>{*title*}</h2>
+		<p>{*text*}</p>
 
 		<ul>
-			(* for nav *)
-				<li><a href="">(* item *)</a></li>
-			(* endfor *)
+			{*for nav*}
+				<li><a href="">{*}</a></li>
+			{*endfor*}
 		</ul>
 
 		<ul>
-			(* obj user1 *)
-				<li>(* prop *) - (* val *)</li>
-			(* endobj *)
+			{*obj user1*}
+				<li>{*prop*} - {*val*}</li>
+			{*endobj*}
 		</ul>
 
 		<ul>
-			(* obj user2 *)
-				<li>(* prop *) - (* val *)</li>
-			(* endobj *)
+			{*obj user2*}
+				<li>{*prop*} - {*val*}</li>
+			{*endobj*}
 		</ul>
 
 	`
