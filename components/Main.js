@@ -9,6 +9,8 @@ var Main = new Snegyok('Main', {
 	},
 
 	template: `
+		{: 5 + 5 :}
+		<Header class="bg2"></Header>
 
 		{# Comment  number 1 .... some text and dots      #}
 		
@@ -26,7 +28,7 @@ var Main = new Snegyok('Main', {
 			{*endobj*}
 		</ul>
 
-		<Header class="bg2"></Header>
+
 		<Content class="bg2"></Content>
 	`
 });

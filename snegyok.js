@@ -133,6 +133,35 @@ this.Snegyok = (function() {
 		}
 
 
+		// Expression
+		function expression() {
+			var	splitArrays = [];
+			var	allLoopArr = view.match(/\{\:[\s\S]*?\:\}/gm);
+			if (allLoopArr === null) return;
+			var	removeEnds = allLoopArr.map(function(i) {
+				return i.replace([':}'], '').replace('{:', '');
+			});
+			for (var i = 0; i < removeEnds.length; i++) {
+				var newArr = [];
+				newArr.push(removeEnds[i].trim());
+				splitArrays.push(newArr);
+			}
+			console.log(splitArrays)
+			for (var i = 0; i < splitArrays.length; i++) {
+				var fn = '' + new Function('return ' + splitArrays[i][0])();
+				var exp = String(splitArrays[i][0])
+				console.log(splitArrays[i][0])
+				console.log(fn);
+				var	pattern = new RegExp(
+					'\\{\\: ' + exp + ' \\:\\}', 'g'
+				);
+				console.log(pattern)
+				view = view.replace(pattern, fn);
+				console.log(view.search(pattern));
+			}
+		}
+
+
 		// For instance
 		this.render = function() {
 			comments();
@@ -140,6 +169,7 @@ this.Snegyok = (function() {
 			forArray();
 			forObj();
 			ifElse();
+			expression();
 			entry.innerHTML = view;
 		};
 
