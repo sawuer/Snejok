@@ -129,18 +129,17 @@ this.Snegyok = (function() {
 		// Comments
 		function comments() {	
 			var pattern = new RegExp('\\{\\#[\\s\\S]*?\\#\\}', 'g');
-			console.log(pattern)
 			view = view.replace(pattern, '');
 		}
 
 
 		// For instance
 		this.render = function() {
+			comments();
 			propsSubst();
 			forArray();
 			forObj();
 			ifElse();
-			comments();
 			entry.innerHTML = view;
 		};
 
