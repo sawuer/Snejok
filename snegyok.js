@@ -1,23 +1,25 @@
 this.Snegyok = (function() {
 
 	return function(entry, confs) {
-
 		var self = this;
 
 		// Public methods
 		this.entry = entry;
 		this.data = confs;
+		this.template = confs.template;
 
 		
 		// Private data
 		var	entry = document.querySelector(this.entry);
-		var startHTML = document.querySelector(this.entry).innerHTML;
+		var startHTML = this.template;
+
+		
+
 		var view = startHTML;
 		var dataArray = Object.keys(this.data);
 
 
 		// Props substitution
-
 		this.templater = function() {
 			view = startHTML;
 			function key(index) {
@@ -25,17 +27,17 @@ this.Snegyok = (function() {
 			}
 			for (var i = 0; i < dataArray.length; i++) {
 				var pattern = new RegExp('\\(\\* ' + key(i) + ' \\*\\)', 'g');
+				if (typeof view === 'undefined') {
+					throw new Error('"template" prop of current instance does not exist or it is empty!');
+				}
 			  view = view.replace(pattern, self.data[key(i)]);
 			}
-			console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 			return view;
 		}
 
 
 		// For-loop for arrays
-
 		this.looper = function() {
-			
 			var	splittedArrays = [];
 			var	allLoopsArray = view.match(/\(\* for[\s\S]*?endfor \*\)/gm);
 			if (allLoopsArray === null) return;
@@ -67,12 +69,9 @@ this.Snegyok = (function() {
 		};
 
 
-
 		// this.ifElse = function() {
 		// 	return view;
 		// }
-
-
 
 
 		// For instance
@@ -80,8 +79,8 @@ this.Snegyok = (function() {
 			this.templater();
 			this.looper();
 			entry.innerHTML = view;
-
 		};
+
 
 		// this.change = function(input, output) {
 		// 	this.data[input] = output;
@@ -89,15 +88,15 @@ this.Snegyok = (function() {
 		// 	return view;
 		// }
 
+
 		// this.exec = function(callback) {
 		// 	callback();
 		// 	this.render();
 		// }
 
+
 		this.render();
 
+
 	}
-
-
-
 }());
