@@ -14,6 +14,10 @@ this.Snegyok = (function() {
 		/** 
 		 * Private data and methods
 		 */
+		var startHTML = this.template;
+		console.log(startHTML);
+
+
 		var	entry = document.querySelector(this.entry);
 		var view = this.template;
 		var dataArray = Object.keys(this.data);
@@ -24,6 +28,7 @@ this.Snegyok = (function() {
 			function key(index) {
 				return Object.keys(self.data)[index];
 			}
+			console.log(view, startHTML)
 			for (var i = 0; i < dataArray.length; i++) {
 				var pattern = new RegExp('\\{\\*' + key(i) + '\\*\\}', 'g');
 				if (typeof view === 'undefined') {
@@ -57,12 +62,10 @@ this.Snegyok = (function() {
 				);
 				for (var j = 0; j < (dataList ? dataList.length : null); j++) {
 					var currentItemInList = dataList[j];
-					console.log(j)
 					newHTML += curHTML
 						.replace('{*}', currentItemInList)
 						.replace('{$}', j + 1);
 				}
-				console.log('////////////////')
 				view = view.replace(pattern, newHTML);
 			}
 		};
