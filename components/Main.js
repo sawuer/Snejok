@@ -9,10 +9,10 @@ var Main = new Snegyok('Main', {
 	},
 
 	template: `
-		{: 5 * 5 + num :}
 		{: 5 - 5 :}
 		{: 5 + 5 :}
 		{: 6 % 5 :}
+		{: 5 * 5 + num :}
 		<Header class="bg2"></Header>
 
 		{# Comment  number 1 .... some text and dots      #}

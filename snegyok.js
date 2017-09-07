@@ -143,28 +143,32 @@ this.Snegyok = (function() {
 			var	removeEnds = allLoopArr.map(function(i) {
 				return i.replace(':}', '').replace('{:', '');
 			});
+			var firstArr = [];
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
-				newArr.push(removeEnds[i].trim());
-				// console.log(newArr[i]);
+				firstArr.push(removeEnds[i]);
+				// console.log(removeEnds[i])
 				for (var j = 0; j < Object.keys(self.data).length; j++) {
 					var val = Object.keys(self.data)[j];
 					if (typeof self.data[val] === 'number' ) {
-					console.log(val)
-						newArr[j] = newArr[i].replace(val, self.data[val]);
-						console.log(newArr[j])
+						removeEnds[i] = removeEnds[i].replace(val, self.data[val]);
+						console.log(removeEnds[i]);
 					}
 				}
+				newArr.push(removeEnds[i].trim());
 				splitArrays.push(newArr);
-				console.log('...................................')
 			}
-			for (var i = 0; i < splitArrays.length; i++) {
+				console.log(firstArr)
+			for (var i = 0; i < firstArr.length; i++) {
 				var fn = new Function('return ' + splitArrays[i][0])();
 				var exp = splitArrays[i][0];
+				var cur = firstArr[i];
+				console.log(exp, fn, firstArr[i]);
 				for (var j = 0; j < operators.length; j++) {
-					exp = exp.replace(operators[j], '\\' + operators[j])
+					cur = cur.replace(operators[j], '\\' + operators[j])
 				}
-				var	pattern = new RegExp('\\{\\: ' + exp + ' \\:\\}', 'g');
+				var	pattern = new RegExp('\\{\\: ' + cur.trim() + ' \\:\\}', 'g');
+				console.log(pattern)
 				view = view.replace(pattern, fn);
 			}
 		}
