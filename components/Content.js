@@ -1,6 +1,5 @@
 var Content = new Snegyok('Content', {
 	title: 'Content',
-	num: 32,
 	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!',
 
 	data1: ['some1', 'some2', 'some3', 'some4'],
@@ -8,7 +7,6 @@ var Content = new Snegyok('Content', {
 	
 	template: `
 
-		<h2>Number: {*num*}</h2>
 		<h2>{*title*}</h2>
 		<p>{*text*}</p>
 

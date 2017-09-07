@@ -146,12 +146,13 @@ this.Snegyok = (function() {
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				newArr.push(removeEnds[i].trim());
-				console.log(splitArrays[i]);
+				// console.log(newArr[i]);
 				for (var j = 0; j < Object.keys(self.data).length; j++) {
 					var val = Object.keys(self.data)[j];
 					if (typeof self.data[val] === 'number' ) {
-						console.log(newArr);
-						console.log(val, self.data[val] )
+					console.log(val)
+						newArr[j] = newArr[i].replace(val, self.data[val]);
+						console.log(newArr[j])
 					}
 				}
 				splitArrays.push(newArr);
