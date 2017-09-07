@@ -20,7 +20,7 @@ var Content = new Snegyok('Content', {
 
 		<ul>
 			{*for data2*}
-				<li><a href="">{*}</a></li>
+				<li><a href="">{*title*}{: 5 * 5 :}: {*}</a></li>
 			{*endfor*}
 		</ul>
 		
