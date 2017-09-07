@@ -63,6 +63,7 @@ this.Snegyok = (function() {
 			}
 		};
 
+
 		// Loop for objects
 		function forObj() {
 			var	splitArrays = [];
@@ -145,13 +146,22 @@ this.Snegyok = (function() {
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				newArr.push(removeEnds[i].trim());
+				console.log(splitArrays[i]);
+				for (var j = 0; j < Object.keys(self.data).length; j++) {
+					var val = Object.keys(self.data)[j];
+					if (typeof self.data[val] === 'number' ) {
+						console.log(newArr);
+						console.log(val, self.data[val] )
+					}
+				}
 				splitArrays.push(newArr);
+				console.log('...................................')
 			}
 			for (var i = 0; i < splitArrays.length; i++) {
 				var fn = new Function('return ' + splitArrays[i][0])();
 				var exp = splitArrays[i][0];
 				for (var j = 0; j < operators.length; j++) {
-					exp = exp.replace(operators[j], '\\'+operators[j])
+					exp = exp.replace(operators[j], '\\' + operators[j])
 				}
 				var	pattern = new RegExp('\\{\\: ' + exp + ' \\:\\}', 'g');
 				view = view.replace(pattern, fn);
