@@ -3,6 +3,8 @@ var Main = new Snegyok('Main', {
 
 	title: 'Main title',
 	num: 10,
+	another: 110,
+	another: 110,
 	description: {
 		name: 'New app',
 		date: '"nedavno"'
@@ -12,7 +14,7 @@ var Main = new Snegyok('Main', {
 		{: 5 - 5 :}
 		{: 5 + 5 :}
 		{: 6 % 5 :}
-		{: 5 * 5 + num :}
+		{: 5 * 5 + num + another :}
 		<Header class="bg2"></Header>
 
 		{# Comment  number 1 .... some text and dots      #}

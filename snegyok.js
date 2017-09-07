@@ -147,28 +147,24 @@ this.Snegyok = (function() {
 			for (var i = 0; i < removeEnds.length; i++) {
 				var newArr = [];
 				firstArr.push(removeEnds[i]);
-				// console.log(removeEnds[i])
 				for (var j = 0; j < Object.keys(self.data).length; j++) {
 					var val = Object.keys(self.data)[j];
 					if (typeof self.data[val] === 'number' ) {
 						removeEnds[i] = removeEnds[i].replace(val, self.data[val]);
-						console.log(removeEnds[i]);
 					}
 				}
 				newArr.push(removeEnds[i].trim());
 				splitArrays.push(newArr);
 			}
-				console.log(firstArr)
 			for (var i = 0; i < firstArr.length; i++) {
 				var fn = new Function('return ' + splitArrays[i][0])();
 				var exp = splitArrays[i][0];
 				var cur = firstArr[i];
-				console.log(exp, fn, firstArr[i]);
 				for (var j = 0; j < operators.length; j++) {
-					cur = cur.replace(operators[j], '\\' + operators[j])
+					var newRegExp = new RegExp('\\' + operators[j], 'g')
+					cur = cur.replace(newRegExp, '\\' + operators[j])
 				}
 				var	pattern = new RegExp('\\{\\: ' + cur.trim() + ' \\:\\}', 'g');
-				console.log(pattern)
 				view = view.replace(pattern, fn);
 			}
 		}
