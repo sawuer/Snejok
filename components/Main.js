@@ -1,21 +1,20 @@
 var Main = new Snegyok('Main', {
 	showTitle: true,
-
 	title: 'Main title',
-	num: 10,
-	another: 110,
-	another: 110,
+	num1: 10,
+	num2: 20,
 	description: {
 		name: 'New app',
-		date: '"nedavno"'
+		date: 'nedavno'
 	},
 
 	template: `
-		{: 5 - 5 :}
-		{: 5 + 5 :}
-		{: 6 % 5 :}
-		{: 5 * 5 + num + another :}
 		<Header class="bg2"></Header>
+
+		{: (5 - 5) + num1 :}
+		{: 5 + (num1 * 5) + num2 :}
+		{: 6 % 5 :}
+		{: 5 / 5 :}
 
 		{# Comment  number 1 .... some text and dots      #}
 		
@@ -24,8 +23,9 @@ var Main = new Snegyok('Main', {
 		#}
 
 		{*if showTitle*}
-			<h1>{*title*} {: 5 / 5 + (20 * 20) :}</h1>
+			<h2>{*title*} {: 5 / 5 + (20 * 20) :}</h2>
 		{*endif*}
+
 		<p>Description:</p>
 		<ul>
 			{*obj description*}

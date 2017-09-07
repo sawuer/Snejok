@@ -57,8 +57,10 @@ this.Snegyok = (function() {
 				);
 				for (var j = 0; j < (dataList ? dataList.length : null); j++) {
 					var currentItemInList = dataList[j];
-					newHTML += curHTML.replace('{*}', currentItemInList);
+					console.log(j)
+					newHTML += curHTML.replace('{*}', currentItemInList).replace('{$}', j+1);
 				}
+				console.log('////////////////')
 				view = view.replace(pattern, newHTML);
 			}
 		};
@@ -127,13 +129,6 @@ this.Snegyok = (function() {
 		}
 
 
-		// Comments
-		function comments() {	
-			var pattern = new RegExp('\\{\\#[\\s\\S]*?\\#\\}', 'g');
-			view = view.replace(pattern, '');
-		}
-
-
 		// Expression
 		function expression() {
 			var operators = ['+', '-', '*', '%', '(', ')']
@@ -167,6 +162,13 @@ this.Snegyok = (function() {
 				var	pattern = new RegExp('\\{\\: ' + cur.trim() + ' \\:\\}', 'g');
 				view = view.replace(pattern, fn);
 			}
+		}
+
+
+		// Comments
+		function comments() {	
+			var pattern = new RegExp('\\{\\#[\\s\\S]*?\\#\\}', 'g');
+			view = view.replace(pattern, '');
 		}
 
 
