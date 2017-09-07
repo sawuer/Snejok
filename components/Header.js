@@ -17,7 +17,7 @@ var Header = new Snegyok('Header', {
 
 		<ul>
 			{*obj user1*}
-				<li>{*prop*} - {*val*}</li>
+				<li>{$}. {*prop*} - {*val*}</li>
 			{*endobj*}
 		</ul>
 

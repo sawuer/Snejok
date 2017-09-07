@@ -58,7 +58,9 @@ this.Snegyok = (function() {
 				for (var j = 0; j < (dataList ? dataList.length : null); j++) {
 					var currentItemInList = dataList[j];
 					console.log(j)
-					newHTML += curHTML.replace('{*}', currentItemInList).replace('{$}', j+1);
+					newHTML += curHTML
+						.replace('{*}', currentItemInList)
+						.replace('{$}', j + 1);
 				}
 				console.log('////////////////')
 				view = view.replace(pattern, newHTML);
@@ -91,7 +93,10 @@ this.Snegyok = (function() {
 					var currentItemInList = dataList[j];
 					var val = dataList[Object.keys(dataList)[j]];
 					var prop = Object.keys(dataList)[j];
-					newHTML += curHTML.replace('{*val*}', val).replace('{*prop*}', prop);
+					newHTML += curHTML
+						.replace('{*val*}', val)
+						.replace('{*prop*}', prop)
+						.replace('{$}', j + 1);
 				}
 				view = view.replace(pattern, newHTML);
 			}
