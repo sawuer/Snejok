@@ -9,7 +9,6 @@ var Main = new Snegyok('Main', {
 	},
 
 	template: `
-		{: 5 / 5 + (20 * 20) :}
 		{: 5 * 5 :}
 		{: 5 - 5 :}
 		{: 5 + 5 :}
@@ -23,7 +22,7 @@ var Main = new Snegyok('Main', {
 		#}
 
 		{*if showTitle*}
-			<h1>{*title*}</h1>
+			<h1>{*title*} {: 5 / 5 + (20 * 20) :}</h1>
 		{*endif*}
 		<p>Description:</p>
 		<ul>

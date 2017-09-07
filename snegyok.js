@@ -135,9 +135,9 @@ this.Snegyok = (function() {
 
 		// Expression
 		function expression() {
+			var operators = ['+', '-', '*', '%', '(', ')']
 			var	splitArrays = [];
 			var	allLoopArr = view.match(/\{\:[\s\S]*?\:\}/gm);
-			var operators = ['+', '-', '*', '%', '(', ')']
 			if (allLoopArr === null) return;
 			var	removeEnds = allLoopArr.map(function(i) {
 				return i.replace(':}', '').replace('{:', '');
@@ -169,19 +169,6 @@ this.Snegyok = (function() {
 			ifElse();
 			entry.innerHTML = view;
 		};
-
-
-		// this.change = function(input, output) {
-		// 	this.data[input] = output;
-		// 	this.render();
-		// 	return view;
-		// }
-
-
-		// this.exec = function(callback) {
-		// 	callback();
-		// 	this.render();
-		// }
 
 
 		this.render();
