@@ -15,7 +15,6 @@ this.Snegyok = (function() {
 		 * Private data and methods
 		 */
 		var startHTML = this.template;
-		console.log(startHTML);
 
 
 		var	entry = document.querySelector(this.entry);
@@ -28,7 +27,6 @@ this.Snegyok = (function() {
 			function key(index) {
 				return Object.keys(self.data)[index];
 			}
-			console.log(view, startHTML)
 			for (var i = 0; i < dataArray.length; i++) {
 				var pattern = new RegExp('\\{\\*' + key(i) + '\\*\\}', 'g');
 				if (typeof view === 'undefined') {
@@ -99,7 +97,7 @@ this.Snegyok = (function() {
 					newHTML += curHTML
 						.replace('{*val*}', val)
 						.replace('{*prop*}', prop)
-						.replace('{$}', j + 1);
+						.replace('{$}', j);
 				}
 				view = view.replace(pattern, newHTML);
 			}
@@ -178,6 +176,11 @@ this.Snegyok = (function() {
 			var pattern = new RegExp('\\{\\#[\\s\\S]*?\\#\\}', 'g');
 			view = view.replace(pattern, '');
 		}
+
+    this.update = function(state, onWhat) {
+    	state = onWhat;
+    	this.render();
+    };
 
 
 		// For instance

@@ -7,10 +7,15 @@ var Header = new Snegyok('Header', {
 	num: 10,
 	
 	template: `
-		{: num * 10 :}
+		{: num * 10 / 10 :}
 		
 		<h1>{*title*}</h1>
 		<p>{*text*}</p>
+		<ul>
+			{*for nav*}
+				<li><a href="">{*}</a></li>
+			{*endfor*}
+		</ul>
 		<ul>
 			{*for nav*}
 				<li><a href="">{*}</a></li>

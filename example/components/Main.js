@@ -11,7 +11,7 @@ var Main = new Snegyok('Main', {
 	template: `
 		<Header class="bg2"></Header>
 
-		{: (5 - 5) + num1 :}
+		{: (5 * 5) + num1 :}
 		<br>
 		{: 5 + (num1 * 5) + num2 :}
 		<br>
@@ -40,3 +40,6 @@ var Main = new Snegyok('Main', {
 		<Content class="bg2"></Content>
 	`
 });
+
+
+
