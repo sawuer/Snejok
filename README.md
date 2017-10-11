@@ -4,19 +4,19 @@ Trying to create javascript template engine.
 
 ## Hello World!
 
-'''
+```
 var Main = new Snegyok('Main', {
 	greet: 'Hello World!'
 	template: `
 		{*greet*}
 	`
 });
-'''
+```
 
 ## Another features
 
 ### Objects
-'''
+```
 var newInstance = new Snegyok('NewInstance', {
 	user: { name: 'John', age: 21 },
 	template: `
@@ -27,10 +27,10 @@ var newInstance = new Snegyok('NewInstance', {
 		</ul>
 	`
 }
-'''
+```
 
 ### Arrays
-'''
+```
 var newInstance = new Snegyok('NewInstance', {
 	nav: ['About', 'FAQ', 'Contacts'],
 	template: `
@@ -41,10 +41,10 @@ var newInstance = new Snegyok('NewInstance', {
 		</ul>
 	`
 }
-'''
+```
 
 ### Conditions
-'''
+```
 var newInstance = new Snegyok('NewInstance', {
 	title: 'Title',
 	template: `
@@ -53,22 +53,22 @@ var newInstance = new Snegyok('NewInstance', {
 		{*endif*}
 	`
 }
-'''
+```
 
 ### Expressions
-'''
+```
 var newInstance = new Snegyok('NewInstance', {
 	num: 4,
 	template: `
 		{: num * 5 / 5 + (20 * 20) :}
 	`
 }
-'''
+```
 
 ### Comments
-'''
+```
 {# This is comment #}
-'''
+```
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
