@@ -1,6 +1,6 @@
 # Snegyok Javascirpt Template Engine
 
-Trying to create my own javascript template engine. It's can be used in conjunction with backend. It's workring like php template engine "<?php ... ?>". Enjoy the snow.
+Trying to create my own javascript template engine. It's can be used in conjunction with backend. It's workring like php template engine.
 
 ## Hello World!
 
@@ -36,7 +36,7 @@ var Main = new Snegyok('Main', {
 ```
 
 
-## Another features
+## Features
 
 ### Objects
 ```
