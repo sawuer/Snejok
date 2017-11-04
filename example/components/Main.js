@@ -25,11 +25,12 @@ var Main = new Snegyok('Main', {
 			Comment  number 2
 		#}
 
+		<br>
+
 		{*if showTitle*}
-			<h2>{*title*} {: 5 / 5 + (20 * 20) :}</h2>
+			{*title*} {: 5 / 5 + (20 * 20) :}
 		{*endif*}
 
-		<p>Description:</p>
 		<ul>
 			{*obj description*}
 				<li>{*prop*} - {*val*}</li>
