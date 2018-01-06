@@ -128,7 +128,6 @@ var Snejok = (function() {
         }
         splitArrays.push([removeEnds[i].trim()]);
       }
-      console.log(firstArr)
       for (let i = 0; i < firstArr.length; i++) {
         var fn = new Function('return ' + splitArrays[i][0])();
         var exp = splitArrays[i][0];
