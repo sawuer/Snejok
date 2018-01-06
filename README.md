@@ -1,12 +1,12 @@
-# Snegyok Javascirpt Template Engine
+# Snejok
 
-Trying to create my own javascript template engine. It's can be used in conjunction with backend. It's workring like php template engine.
+Backend side Javascript template engine
 
 ## Hello World!
 
 ```
 // in some.js
-var Main = new Snegyok('Main', {
+var Main = new Snejok('Main', {
   greet: 'Hello World!'
   template: `
     {*greet*}
@@ -21,11 +21,11 @@ var Main = new Snegyok('Main', {
 
 ```
 // in some.js
-var Hello = new Snegyok('Hello', {
+var Hello = new Snejok('Hello', {
   greet: 'Hello World!'
 });
 
-var Main = new Snegyok('Main', {
+var Main = new Snejok('Main', {
   template: `
     <Hello></Hello>
   `
@@ -35,12 +35,11 @@ var Main = new Snegyok('Main', {
 <Main></Main>
 ```
 
-
 ## Features
 
 ### Objects
 ```
-var newInstance = new Snegyok('NewInstance', {
+var newInstance = new Snejok('NewInstance', {
   user: { name: 'John', age: 21 },
   template: `
     <ul>
@@ -54,7 +53,7 @@ var newInstance = new Snegyok('NewInstance', {
 
 ### Arrays
 ```
-var newInstance = new Snegyok('NewInstance', {
+var newInstance = new Snejok('NewInstance', {
   nav: ['About', 'FAQ', 'Contacts'],
   template: `
     <ul>
@@ -68,7 +67,7 @@ var newInstance = new Snegyok('NewInstance', {
 
 ### Conditions
 ```
-var newInstance = new Snegyok('NewInstance', {
+var newInstance = new Snejok('NewInstance', {
   title: 'Title',
   template: `
     {*if showTitle*}
@@ -80,7 +79,7 @@ var newInstance = new Snegyok('NewInstance', {
 
 ### Expressions
 ```
-var newInstance = new Snegyok('NewInstance', {
+var newInstance = new Snejok('NewInstance', {
   num: 4,
   template: `
     {: num * 5 / 5 + (20 * 20) :}
@@ -93,7 +92,7 @@ var newInstance = new Snegyok('NewInstance', {
 {# This is comment #}
 ```
 
-## Authors
+## Author
 
 * **Ruslan Timurziyev** - [github.com/sawuer](https://github.com/sawuer)
 

@@ -1,4 +1,4 @@
-var Main = new Snegyok('Main', {
+var Main = new Snejok('Main', {
 	showTitle: true,
 	title: 'Main title',
 	num1: 10,

@@ -1,4 +1,4 @@
-var Header = new Snegyok('Header', {
+var Header = new Snejok('Header', {
 	title: 'Header',
 	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!',
 	nav: ['About', 'FAQ', 'Contacts'],

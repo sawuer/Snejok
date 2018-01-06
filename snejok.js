@@ -1,20 +1,12 @@
-/* jshint esversion: 6 */
+var Snejok = (function() {
 
-class Snegyok {
+  return function (entry, confs) {
 
-  constructor(entry, confs) {
-
-    /** 
-     * Public props
-     */
     this.entry = entry;
     this.data = confs;
     this.template = confs.template;
 
     
-    /** 
-     * Private data and methods
-     */
     var that = this;
     var entryEl = document.querySelector(this.entry);
     var view = this.template;
@@ -32,7 +24,9 @@ class Snegyok {
       var allLoopArr = view.match(/\{\*for [\s\S]*?endfor\*\}/gm);
       if (allLoopArr === null) return;
       var splitArrays = [];
-      allLoopArr = allLoopArr.map(i => i.replace(['{*endfor*}'], '').replace('{*for', ''));
+      allLoopArr = allLoopArr.map(function(i) {
+        return i.replace(['{*endfor*}'], '').replace('{*for', '')
+      });
       for (let i = 0; i < allLoopArr.length; i++) {
         var newArr = [];
         newArr.push(allLoopArr[i].trim().split(/\*\}$/gm));
@@ -59,7 +53,7 @@ class Snegyok {
       var splitArrays = [];
       var allLoopArr = view.match(/\{\*obj [\s\S]*?endobj\*\}/gm);
       if (allLoopArr === null) return;
-      var  removeEnds = allLoopArr.map(i => {
+      var  removeEnds = allLoopArr.map(function(i) {
         return i.replace(['{*endobj*}'], '').replace('{*obj', '');
       });
       for (let i = 0; i < removeEnds.length; i++) {
@@ -93,7 +87,7 @@ class Snegyok {
       var splitArrays = [];
       var allLoopArr = view.match(/\{\*if [\s\S]*?endif\*\}/gm);
       if (allLoopArr === null) return;
-      allLoopArr = allLoopArr.map(i => {
+      allLoopArr = allLoopArr.map(function(i) {
         return i.replace('{*endif*}', '').replace('{*if', '');
       });
       for (let i = 0; i < allLoopArr.length; i++) {
@@ -120,7 +114,7 @@ class Snegyok {
       var splitArrays = [];
       var allLoopArr = view.match(/\{\:[\s\S]*?\:\}/gm);
       if (allLoopArr === null) return;
-      var removeEnds = allLoopArr.map(i => {
+      var removeEnds = allLoopArr.map(function(i) {
         return i.replace(':}', '').replace('{:', '');
       });
       var firstArr = [];
@@ -154,7 +148,7 @@ class Snegyok {
     }
 
 
-    (() => {
+    (function() {
       expression();
       comments();
       propsSubst();
@@ -166,4 +160,5 @@ class Snegyok {
 
 
   }
-}
+  
+})();

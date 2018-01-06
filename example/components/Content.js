@@ -1,4 +1,4 @@
-var Content = new Snegyok('Content', {
+var Content = new Snejok('Content', {
 	title: 'Title',
 	text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ipsam!',
 	data1: ['some1', 'some2', 'some3', 'some4', 'some5'],
